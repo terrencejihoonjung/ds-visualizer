@@ -1,2 +1,12 @@
 # ds-visualizer
-open-source data-structures visualizer
+* open-source data-structures visualizer with lots of customizable inputs for learning purposes.
+
+## purpose
+* provide a space for those who rely on visual learning to deeply understand data structures and their implementations.
+* master unit testing and achieve near-to-100% test coverage through TTD.
+* learn and utilize a JS data visualization library.
+
+## tech stack (frontend-focused)
+* typescript/react.js/daisyui
+* unit-testing: jest + react-testing library
+* data-visualization library: d3.js
