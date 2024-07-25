@@ -8,5 +8,5 @@
 
 ## tech stack (frontend-focused)
 * typescript/react.js/daisyui
-* unit-testing: jest + react-testing library
+* testing: vitest + react-testing library
 * data-visualization library: d3.js
