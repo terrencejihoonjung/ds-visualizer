@@ -1,24 +1,27 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import DynamicArray from "./pages/DynamicArray/DynamicArray";
+import Layout from "./Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/dynamic-array",
-    element: <DynamicArray />,
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "dynamic-array",
+        element: <DynamicArray />,
+      },
+    ],
   },
 ]);
 
 function AppRouter() {
-  return (
-    <div className="w-full min-h-screen">
-      <RouterProvider router={router} />
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default AppRouter;
