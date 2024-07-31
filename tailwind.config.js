@@ -15,6 +15,9 @@ export default {
       fontFamily: {
         mono: ["Inconsolata", "monospace"],
       },
+      colors: {
+        "base-200": "#a8a29e",
+      },
     },
   },
   plugins: [daisyui],
