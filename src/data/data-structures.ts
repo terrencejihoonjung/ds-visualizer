@@ -2,7 +2,7 @@ import DataStructure from "../types/DataStructure";
 
 const dataStructures: DataStructure[] = [
   {
-    name: "Dynamic Arrays",
+    name: "Dynamic Array",
     description: "Resizable arrays with dynamic capacity.",
     icon: "🪟",
     category: "Arrays/Strings",

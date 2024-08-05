@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import DataStructure from "../../types/DataStructure";
 
 interface RowProps {
@@ -6,7 +7,8 @@ interface RowProps {
 
 function Row({ dataStructure }: RowProps) {
   return (
-    <div
+    <Link
+      to={`/${dataStructure.name.toLowerCase().split(" ").join("-")}`}
       role="button"
       className="bg-base-200 bg-opacity-0 p-6 border flex justify-between items-center mb-2 hover:bg-opacity-5"
     >
@@ -24,7 +26,7 @@ function Row({ dataStructure }: RowProps) {
         <p className="text-sm text-gray-600">{dataStructure.category}</p>
         <span className="badge badge-md">{dataStructure.difficulty}</span>
       </div>
-    </div>
+    </Link>
   );
 }
 
