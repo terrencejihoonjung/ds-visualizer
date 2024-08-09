@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home/Home";
-import DynamicArray from "./pages/DynamicArray/DynamicArray";
+import Home from "./pages/Home";
+import DynamicArray from "./pages/DynamicArray";
 import Layout from "./Layout";
 
 const router = createBrowserRouter([

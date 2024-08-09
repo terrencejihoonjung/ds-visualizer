@@ -1,4 +1,4 @@
-import DataStructure from "../types/DataStructure";
+import { DataStructure } from "../entities";
 
 const dataStructures: DataStructure[] = [
   {

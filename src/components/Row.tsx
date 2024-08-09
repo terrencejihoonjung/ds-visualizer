@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import DataStructure from "../../types/DataStructure";
+import { DataStructure } from "../entities";
 
 interface RowProps {
   dataStructure: DataStructure;

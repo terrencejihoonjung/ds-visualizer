@@ -1,5 +1,5 @@
-import dataStructures from "../../data/data-structures";
-import Row from "./Row";
+import dataStructures from "../data/data-structures";
+import Row from "../components/Row";
 
 function Home() {
   return (
@@ -23,7 +23,11 @@ function Home() {
           <div className="">
             {dataStructures.map((dataStructure) => {
               return (
-                <Row key={dataStructure.name} dataStructure={dataStructure} />
+                <Row
+                  data-testid="row"
+                  key={dataStructure.name}
+                  dataStructure={dataStructure}
+                />
               );
             })}
           </div>
