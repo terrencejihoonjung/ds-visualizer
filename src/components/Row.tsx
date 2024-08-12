@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { DataStructure } from "../entities";
+import Badge from "./Badge";
 
 interface RowProps {
   dataStructure: DataStructure;
@@ -24,7 +25,7 @@ function Row({ dataStructure }: RowProps) {
 
       <div className="text-right space-y-2">
         <p className="text-sm text-gray-600">{dataStructure.category}</p>
-        <span className="badge badge-md">{dataStructure.difficulty}</span>
+        <Badge text={dataStructure.difficulty} />
       </div>
     </Link>
   );

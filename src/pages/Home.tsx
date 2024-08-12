@@ -1,10 +1,10 @@
-import dataStructures from "../data/data-structures";
+import { dataStructures } from "../data/data-structures";
 import Row from "../components/Row";
 
 function Home() {
   return (
     <div className="w-full min-h-screen p-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="w-3/5 mx-auto">
         {/* top heading */}
         <header className="mb-36">
           <h1 className="text-h1 font-bold mb-1">ds-visualizer</h1>
@@ -24,9 +24,9 @@ function Home() {
             {dataStructures.map((dataStructure) => {
               return (
                 <Row
+                  key={dataStructure[0]}
                   data-testid="row"
-                  key={dataStructure.name}
-                  dataStructure={dataStructure}
+                  dataStructure={dataStructure[1]}
                 />
               );
             })}

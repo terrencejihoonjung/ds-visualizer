@@ -18,17 +18,13 @@ export default {
       colors: {
         "base-200": "#a8a29e",
       },
+      height: {
+        playground: "24rem",
+      },
     },
   },
   plugins: [daisyui],
   daisyui: {
-    themes: [
-      {
-        lofi: {
-          ...require("daisyui/src/theming/themes")["[data-theme=lofi]"],
-          "font-family": "Inconsolata, monospace",
-        },
-      },
-    ],
+    themes: ["lofi"],
   },
 };
