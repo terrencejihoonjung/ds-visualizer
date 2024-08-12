@@ -1,7 +1,7 @@
 // Home.test.tsx
 import { render, screen } from "@testing-library/react";
 import Home from "../../pages/Home.tsx";
-import dataStructures from "../../data/data-structures.ts";
+import { dataStructures } from "../../data/data-structures.ts";
 import { DataStructure } from "../../entities.ts";
 
 vi.mock("../../components/Row", () => {
