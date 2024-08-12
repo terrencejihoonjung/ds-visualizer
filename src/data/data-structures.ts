@@ -43,4 +43,6 @@ export const dataStructures: DataStructureKV[] = [
   ],
 ];
 
-export const map: Map<string, DataStructure> = new Map(dataStructures);
+const map: Map<string, DataStructure> = new Map(dataStructures);
+
+export default map;

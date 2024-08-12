@@ -1,4 +1,4 @@
-import { map } from "../data/data-structures";
+import map from "../data/data-structures";
 import Heading from "../components/Heading";
 import DynamicArrayPG from "../components/DSPlaygrounds/DynamicArrayPG";
 
