@@ -41,7 +41,7 @@ function DynamicArrayPG() {
       .data(state.array)
       .enter()
       .append("g")
-      .attr("transform", (d, i) => `translate(${i * cellWidth}, 0)`);
+      .attr("transform", (_d, i) => `translate(${i * cellWidth}, 0)`);
 
     cells
       .append("rect")
@@ -59,13 +59,13 @@ function DynamicArrayPG() {
       .text((d) => d);
 
     // Add capacity indicators
-    const capacityCells = svg
+    svg
       .selectAll(".capacity")
       .data(new Array(state.capacity - state.size).fill(null))
       .enter()
       .append("rect")
       .attr("class", "capacity")
-      .attr("x", (d, i) => (i + state.size) * cellWidth)
+      .attr("x", (_d, i) => (i + state.size) * cellWidth)
       .attr("y", 0)
       .attr("width", cellWidth - 1)
       .attr("height", cellHeight)
