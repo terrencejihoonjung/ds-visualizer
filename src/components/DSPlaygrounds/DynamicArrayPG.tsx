@@ -47,13 +47,14 @@ function DynamicArrayPG() {
       .append("rect")
       .attr("width", cellWidth - 1)
       .attr("height", cellHeight)
-      .attr("fill", "#e2e8f0")
-      .attr("stroke", "#4a5568");
+      .attr("fill", "primary")
+      .attr("stroke", "primary");
 
     cells
       .append("text")
       .attr("x", cellWidth / 2)
       .attr("y", cellHeight / 2)
+      .attr("fill", "white")
       .attr("text-anchor", "middle")
       .attr("dominant-baseline", "central")
       .text((d) => d);
@@ -70,7 +71,7 @@ function DynamicArrayPG() {
       .attr("width", cellWidth - 1)
       .attr("height", cellHeight)
       .attr("fill", "none")
-      .attr("stroke", "#a0aec0")
+      .attr("stroke", "black")
       .attr("stroke-dasharray", "5,5");
   };
 
