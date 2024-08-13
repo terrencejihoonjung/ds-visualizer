@@ -24,7 +24,7 @@ export const dataStructures: DataStructureKV[] = [
   [
     "doubly-linked-list",
     {
-      name: "Double Linked List",
+      name: "Doubly Linked List",
       description: "Nodes linked bi-directionally for efficient traversal.",
       icon: "🔛",
       category: "Linked Lists",

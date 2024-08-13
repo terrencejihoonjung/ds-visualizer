@@ -12,13 +12,10 @@ function DynamicArrayPG() {
 
   const [arrInput, setArrInput] = useState<string>(JSON.stringify(state.array)); // arr-input
   const [pushInput, setPushInput] = useState<string>(""); // push-input
-  const [resizingFactor, setResizingFactor] = useState<string>("2"); // resizing factor input
+  const [resizingFactor, setResizingFactor] = useState<number>(2); // resizing factor input
   const svgRef = useRef<SVGSVGElement>(null); // visualization state
 
   useEffect(() => {
-    // fill in any empty inputs
-    if (resizingFactor.length === 0) setResizingFactor("2");
-
     // update the visualization with the valid array state
     if (svgRef.current) {
       updateVisualization();
@@ -84,7 +81,7 @@ function DynamicArrayPG() {
       const newArray = [...prev.array, newValue];
       let newCapacity = prev.capacity;
       if (newArray.length > prev.capacity) {
-        newCapacity = Math.ceil(prev.capacity * parseFloat(resizingFactor));
+        newCapacity = Math.ceil(prev.capacity * resizingFactor);
       }
       return {
         array: newArray,
@@ -127,7 +124,7 @@ function DynamicArrayPG() {
     const parsedInput = parseFloat(input);
 
     if (input === "" || parsedInput > 1) {
-      setResizingFactor(input);
+      setResizingFactor(parsedInput);
     }
   };
 
@@ -171,7 +168,7 @@ function DynamicArrayPG() {
             <textarea
               value={arrInput}
               onChange={updateState}
-              className="textarea textarea-bordered textarea-md w-full max-w-md"
+              className="textarea textarea-bordered textarea-md w-1/2 text-p"
               placeholder="Custom Input"
             />
           </div>
@@ -179,13 +176,24 @@ function DynamicArrayPG() {
           {/* Resizing Factor Input */}
           <div className="flex justify-between items-center">
             <h3 className="text-h3 font-bold">Resizing Factor</h3>
-            <input
-              type="text"
-              value={resizingFactor}
-              onChange={updateResizingFactor}
-              className="input input-bordered"
-              placeholder="Resizing Factor"
-            />
+
+            <div className="w-1/2">
+              <input
+                type="range"
+                min={2}
+                max={5}
+                value={resizingFactor}
+                onChange={updateResizingFactor}
+                className="range"
+                step="1"
+              />
+              <div className="flex w-full justify-between px-2 text-h6 font-bold">
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
