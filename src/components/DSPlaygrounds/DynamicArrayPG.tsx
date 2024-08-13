@@ -2,38 +2,45 @@ import * as d3 from "d3";
 import { useState, useEffect, useRef } from "react";
 import { DynamicArrayState } from "../../entities";
 
+const MAX_CELLS = 16;
+
 function DynamicArrayPG() {
-  // array state (arr, size, capacity)
   const [state, setState] = useState<DynamicArrayState>({
     array: [1],
     size: 1,
     capacity: 2,
   });
 
-  const [arrInput, setArrInput] = useState<string>(JSON.stringify(state.array)); // arr-input
-  const [pushInput, setPushInput] = useState<string>(""); // push-input
-  const [resizingFactor, setResizingFactor] = useState<number>(2); // resizing factor input
-  const svgRef = useRef<SVGSVGElement>(null); // visualization state
+  const [arrInput, setArrInput] = useState<string>(JSON.stringify(state.array));
+  const [pushInput, setPushInput] = useState<string>("");
+  const [resizingFactor, setResizingFactor] = useState<number>(2);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
-    // update the visualization with the valid array state
-    if (svgRef.current) {
+    if (svgRef.current && containerRef.current) {
       updateVisualization();
     }
   }, [state, arrInput]);
 
   const updateVisualization = () => {
+    if (!svgRef.current || !containerRef.current) return;
+
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const width = 600;
-    const height = 100;
+    const containerWidth = containerRef.current.clientWidth;
+    const containerHeight = containerRef.current.clientHeight;
     const cellWidth = 50;
     const cellHeight = 50;
 
-    svg.attr("width", width).attr("height", height);
+    svg.attr("width", containerWidth).attr("height", containerHeight);
 
-    const cells = svg
+    const g = svg.append("g");
+
+    const cells = g
       .selectAll("g")
       .data(state.array)
       .enter()
@@ -57,8 +64,7 @@ function DynamicArrayPG() {
       .text((d) => d);
 
     // Add capacity indicators
-    svg
-      .selectAll(".capacity")
+    g.selectAll(".capacity")
       .data(new Array(state.capacity - state.size).fill(null))
       .enter()
       .append("rect")
@@ -70,6 +76,15 @@ function DynamicArrayPG() {
       .attr("fill", "none")
       .attr("stroke", "black")
       .attr("stroke-dasharray", "5,5");
+
+    // Calculate the total width of the visualization
+    const totalWidth = state.capacity * cellWidth;
+
+    // Center the visualization
+    const translateX = (containerWidth - totalWidth) / 2;
+    const translateY = (containerHeight - cellHeight) / 2;
+
+    g.attr("transform", `translate(${translateX}, ${translateY})`);
   };
 
   const push = () => {
@@ -78,11 +93,28 @@ function DynamicArrayPG() {
     if (isNaN(newValue)) return;
 
     setState((prev) => {
+      if (prev.array.length >= MAX_CELLS) {
+        setErrorMessage(
+          `Cannot push: Array size limit (${MAX_CELLS}) reached.`
+        );
+        return prev;
+      }
+
       const newArray = [...prev.array, newValue];
       let newCapacity = prev.capacity;
+
       if (newArray.length > prev.capacity) {
-        newCapacity = Math.ceil(prev.capacity * resizingFactor);
+        const potentialNewCapacity = Math.ceil(prev.capacity * resizingFactor);
+        if (potentialNewCapacity > MAX_CELLS) {
+          setErrorMessage(
+            `Cannot resize: New capacity (${potentialNewCapacity}) would exceed the limit (${MAX_CELLS}).`
+          );
+          return prev;
+        }
+        newCapacity = potentialNewCapacity;
       }
+
+      setErrorMessage("");
       return {
         array: newArray,
         size: newArray.length,
@@ -96,6 +128,7 @@ function DynamicArrayPG() {
     setState((prev) => {
       if (prev.array.length === 0) return prev;
       const newArray = prev.array.slice(0, -1);
+      setErrorMessage("");
       return {
         array: newArray,
         size: newArray.length,
@@ -108,22 +141,30 @@ function DynamicArrayPG() {
     const input = e.target.value;
     setArrInput(input);
 
-    // if input is valid update array state
-    if (input[0] === "[" && input[input.length - 1] === "]") {
-      setState((state) => ({ ...state, array: JSON.parse(input) }));
-    } else return;
-
-    setState((state) => ({
-      ...state,
-      capacity: state.array.length,
-    }));
+    try {
+      const parsedArray = JSON.parse(input);
+      if (Array.isArray(parsedArray) && parsedArray.length <= MAX_CELLS) {
+        setState((state) => ({
+          array: parsedArray,
+          size: parsedArray.length,
+          capacity: Math.max(parsedArray.length, state.capacity),
+        }));
+        setErrorMessage("");
+      } else {
+        setErrorMessage(
+          `Invalid input: Must be an array with at most ${MAX_CELLS} elements.`
+        );
+      }
+    } catch (error) {
+      setErrorMessage("Invalid input: Must be a valid array.");
+    }
   };
 
   const updateResizingFactor = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value.trim();
     const parsedInput = parseFloat(input);
 
-    if (input === "" || parsedInput > 1) {
+    if (input === "" || (parsedInput > 1 && parsedInput <= MAX_CELLS)) {
       setResizingFactor(parsedInput);
     }
   };
@@ -141,25 +182,31 @@ function DynamicArrayPG() {
         <button onClick={push} className="btn btn-outline">
           Push
         </button>
-        <div className="divider divider-primary divider-horizontal "></div>
+        <div className="divider divider-primary divider-horizontal"></div>
         <button onClick={pop} className="btn btn-outline">
           Pop
         </button>
       </div>
 
       {/* Visualization Window */}
-      <div className="relative p-4 h-playground w-full flex flex-col justify-center items-center border border-black rounded-md">
+      <div
+        ref={containerRef}
+        className="relative p-4 h-playground w-full flex flex-col justify-center items-center border border-black rounded-md"
+      >
         <div className="absolute top-0 left-0 p-3 text-lg">
           <span className="font-bold">Size:</span> {state.size}
           <span className="font-bold ml-4">Capacity:</span> {state.capacity}
         </div>
 
-        <svg className="w-full" ref={svgRef}></svg>
+        <svg className="w-full h-full" ref={svgRef}></svg>
       </div>
 
       {/* Options */}
       <div className="flex flex-col items-start w-full">
         <h2 className="text-h2 underline font-bold mb-4">Options</h2>
+        {errorMessage && (
+          <div className="text-red-500 mb-4">{errorMessage}</div>
+        )}
 
         <div className="w-full flex flex-col space-y-4">
           {/* Array Input */}
