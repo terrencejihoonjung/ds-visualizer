@@ -9,6 +9,7 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🪟",
       category: "Arrays/Strings",
       difficulty: "Beginner",
+      notesUrl: "https://dev.to/jihoonj/implementing-dynamic-arrays-5fb5",
     },
   ],
   [
@@ -19,6 +20,7 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🔜",
       category: "Linked Lists",
       difficulty: "Beginner",
+      notesUrl: "",
     },
   ],
   [
@@ -29,6 +31,7 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🔛",
       category: "Linked Lists",
       difficulty: "Beginner",
+      notesUrl: "",
     },
   ],
   [
@@ -39,6 +42,7 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🧮",
       category: "Arrays/Strings",
       difficulty: "Beginner",
+      notesUrl: "",
     },
   ],
 ];

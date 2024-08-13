@@ -4,6 +4,7 @@ export type DataStructure = {
   icon: string;
   category: string;
   difficulty: "Beginner" | "Intermediate" | "Advanced";
+  notesUrl: string;
 };
 
 export type DataStructureKV = [string, DataStructure];

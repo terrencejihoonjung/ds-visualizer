@@ -1,15 +1,24 @@
 import * as d3 from "d3";
 import { useState, useEffect, useRef } from "react";
 import { DynamicArrayState } from "../../entities";
+import PencilIcon from "../Icons/PencilIcon";
+import { Link } from "react-router-dom";
+import map from "../../data/data-structures";
 
 const MAX_CELLS = 16;
+const defaultArray = {
+  array: [1],
+  size: 1,
+  capacity: 2,
+};
 
-function DynamicArrayPG() {
-  const [state, setState] = useState<DynamicArrayState>({
-    array: [1],
-    size: 1,
-    capacity: 2,
-  });
+type DynamicArrayPGProps = {
+  className?: string;
+};
+
+function DynamicArrayPG({ className }: DynamicArrayPGProps) {
+  const ds = map.get("dynamic-array")!;
+  const [state, setState] = useState<DynamicArrayState>(defaultArray);
 
   const [arrInput, setArrInput] = useState<string>(JSON.stringify(state.array));
   const [pushInput, setPushInput] = useState<string>("");
@@ -137,6 +146,14 @@ function DynamicArrayPG() {
     });
   };
 
+  const handleReset = () => {
+    setState(defaultArray);
+    setArrInput(JSON.stringify(defaultArray.array));
+    setPushInput("");
+    setResizingFactor(2);
+    setErrorMessage("");
+  };
+
   const updateState = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const input = e.target.value;
     setArrInput(input);
@@ -170,22 +187,31 @@ function DynamicArrayPG() {
   };
 
   return (
-    <div className="w-full space-y-4">
-      <div className="flex space-x-2">
-        <input
-          type="text"
-          value={pushInput}
-          onChange={(e) => setPushInput(e.target.value)}
-          className="input input-bordered"
-          placeholder="Enter a number"
-        />
-        <button onClick={push} className="btn btn-outline">
-          Push
-        </button>
-        <div className="divider divider-primary divider-horizontal"></div>
-        <button onClick={pop} className="btn btn-outline">
-          Pop
-        </button>
+    <div className={`w-full space-y-4 ${className}`}>
+      <div className="flex justify-between items-center">
+        <div className="flex items-between space-x-2">
+          <input
+            type="text"
+            value={pushInput}
+            onChange={(e) => setPushInput(e.target.value)}
+            className="input input-bordered"
+            placeholder="Enter a number"
+          />
+          <button onClick={push} className="btn btn-outline">
+            Push
+          </button>
+          <div className="divider divider-primary divider-horizontal"></div>
+          <button onClick={pop} className="btn btn-outline">
+            Pop
+          </button>
+          <div className="divider divider-primary divider-horizontal"></div>
+          <button onClick={handleReset} className="btn btn-outline">
+            Reset
+          </button>
+        </div>
+        <Link to={ds.notesUrl} className="btn btn-outline">
+          <PencilIcon /> <p>Notes</p>
+        </Link>
       </div>
 
       {/* Visualization Window */}
