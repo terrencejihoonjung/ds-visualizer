@@ -14,3 +14,7 @@ export type DynamicArrayState = {
   size: number;
   capacity: number;
 };
+
+export type PlaygroundProps = {
+  className?: string;
+};

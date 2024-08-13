@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import { useState, useEffect, useRef } from "react";
-import { DynamicArrayState } from "../../entities";
+import { DynamicArrayState, PlaygroundProps } from "../../entities";
 import PencilIcon from "../Icons/PencilIcon";
 import { Link } from "react-router-dom";
 import map from "../../data/data-structures";
@@ -12,11 +12,7 @@ const defaultArray = {
   capacity: 2,
 };
 
-type DynamicArrayPGProps = {
-  className?: string;
-};
-
-function DynamicArrayPG({ className }: DynamicArrayPGProps) {
+function DynamicArrayPG({ className }: PlaygroundProps) {
   const ds = map.get("dynamic-array")!;
   const [state, setState] = useState<DynamicArrayState>(defaultArray);
 

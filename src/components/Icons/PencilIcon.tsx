@@ -2,7 +2,7 @@ type PencilIconProps = {
   size?: string;
 };
 
-function PencilIcon({ size = "size-6" }: PencilIconProps) {
+function PencilIcon({ size = "size-5" }: PencilIconProps) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
