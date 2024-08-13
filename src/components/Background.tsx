@@ -28,7 +28,7 @@ function Background({
 
   return (
     <div className="fixed inset-0 w-screen h-screen pointer-events-none">
-      <svg className="w-full h-full">
+      <svg className="w-full h-full" data-testid="background-svg">
         <pattern
           id={patternId}
           x={x % scaledGap}
@@ -36,6 +36,7 @@ function Background({
           width={scaledGap}
           height={scaledGap}
           patternUnits="userSpaceOnUse"
+          data-testid="background-pattern"
         >
           <path
             stroke={color}
@@ -43,6 +44,7 @@ function Background({
             d={`M${scaledGap / 2} 0 V${scaledGap} M0 ${
               scaledGap / 2
             } H${scaledGap}`}
+            data-testid="background-path"
           />
         </pattern>
         <rect
