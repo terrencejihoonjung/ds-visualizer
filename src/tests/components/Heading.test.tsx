@@ -10,6 +10,7 @@ describe("Heading", () => {
     icon: "🪟",
     category: "Arrays/Strings",
     difficulty: "Beginner",
+    notesUrl: "",
   };
 
   it("should render ds prop's name", () => {

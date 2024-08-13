@@ -10,6 +10,7 @@ describe("Row", () => {
     icon: "🪟",
     category: "Arrays/Strings",
     difficulty: "Beginner",
+    notesUrl: "",
   };
 
   it("should render the correct icon, name, description, category, and difficulty", () => {
