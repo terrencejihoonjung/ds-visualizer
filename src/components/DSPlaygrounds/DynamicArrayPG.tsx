@@ -216,8 +216,10 @@ function DynamicArrayPG({ className }: PlaygroundProps) {
         className="relative p-4 h-playground w-full flex flex-col justify-center items-center border border-black rounded-md"
       >
         <div className="absolute top-0 left-0 p-3 text-lg">
-          <span className="font-bold">Size:</span> {state.size}
-          <span className="font-bold ml-4">Capacity:</span> {state.capacity}
+          <span className="font-bold">Size:</span>{" "}
+          <span data-testid="size">{state.size}</span>
+          <span className="font-bold ml-4">Capacity:</span>{" "}
+          <span data-testid="capacity">{state.capacity}</span>
         </div>
 
         <svg className="w-full h-full" ref={svgRef}></svg>

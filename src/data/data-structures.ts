@@ -20,7 +20,7 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🔜",
       category: "Linked Lists",
       difficulty: "Beginner",
-      notesUrl: "",
+      notesUrl: "https://dev.to/jihoonj/implementing-a-singly-linked-list-3508",
     },
   ],
   [
