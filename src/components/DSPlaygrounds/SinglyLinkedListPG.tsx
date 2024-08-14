@@ -10,6 +10,8 @@ interface Node {
   next: Node | null;
 }
 
+const MAX_NODES = 9;
+
 function SinglyLinkedListPG({ className }: PlaygroundProps) {
   const ds = map.get("singly-linked-list")!;
   const [head, setHead] = useState<Node | null>(null);
@@ -22,9 +24,10 @@ function SinglyLinkedListPG({ className }: PlaygroundProps) {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const svgRef = useRef<SVGSVGElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (svgRef.current) {
+    if (svgRef.current && containerRef.current) {
       updateVisualization();
     }
   }, [head, size]);
@@ -33,32 +36,41 @@ function SinglyLinkedListPG({ className }: PlaygroundProps) {
     const svg = d3.select(svgRef.current);
     svg.selectAll("*").remove();
 
-    const width = 600;
-    const height = 100;
+    const containerWidth = containerRef.current?.clientWidth || 600;
+    const containerHeight = containerRef.current?.clientHeight || 100;
     const nodeRadius = 20;
     const nodeSpacing = 80;
 
-    svg.attr("width", width).attr("height", height);
+    svg.attr("width", containerWidth).attr("height", containerHeight);
+
+    const totalWidth = (size - 1) * nodeSpacing + 2 * nodeRadius;
+    const startX = (containerWidth - totalWidth) / 2;
+
+    const g = svg.append("g").attr("transform", `translate(${startX}, 0)`);
 
     let currentNode = head;
     let index = 0;
 
     while (currentNode !== null) {
-      const g = svg
+      const nodeG = g
         .append("g")
         .attr(
           "transform",
-          `translate(${index * nodeSpacing + nodeRadius}, ${height / 2})`
+          `translate(${index * nodeSpacing + nodeRadius}, ${
+            containerHeight / 2
+          })`
         );
 
       // Node circle
-      g.append("circle")
+      nodeG
+        .append("circle")
         .attr("r", nodeRadius)
         .attr("fill", "primary")
         .attr("stroke", "primary");
 
       // Node value
-      g.append("text")
+      nodeG
+        .append("text")
         .attr("text-anchor", "middle")
         .attr("dy", "0.3em")
         .attr("fill", "white")
@@ -66,13 +78,12 @@ function SinglyLinkedListPG({ className }: PlaygroundProps) {
 
       // Arrow to next node
       if (currentNode.next !== null) {
-        svg
-          .append("path")
+        g.append("path")
           .attr(
             "d",
-            `M${index * nodeSpacing + nodeRadius * 2},${height / 2} L${
+            `M${index * nodeSpacing + nodeRadius * 2},${containerHeight / 2} L${
               (index + 1) * nodeSpacing
-            },${height / 2}`
+            },${containerHeight / 2}`
           )
           .attr("stroke", "black")
           .attr("marker-end", "url(#arrowhead)");
@@ -98,6 +109,13 @@ function SinglyLinkedListPG({ className }: PlaygroundProps) {
   };
 
   const insertAtHead = () => {
+    if (size >= MAX_NODES) {
+      setErrorMessage(
+        `Cannot insert: Maximum number of nodes (${MAX_NODES}) reached.`
+      );
+      return;
+    }
+
     const value = parseInt(inputValue);
     if (isNaN(value)) {
       setErrorMessage("Please enter a valid number");
@@ -123,6 +141,13 @@ function SinglyLinkedListPG({ className }: PlaygroundProps) {
   };
 
   const insertAtTail = () => {
+    if (size >= MAX_NODES) {
+      setErrorMessage(
+        `Cannot insert: Maximum number of nodes (${MAX_NODES}) reached.`
+      );
+      return;
+    }
+
     const value = parseInt(inputValue);
     if (isNaN(value)) {
       setErrorMessage("Please enter a valid number");
@@ -164,6 +189,13 @@ function SinglyLinkedListPG({ className }: PlaygroundProps) {
   };
 
   const insertAtPosition = () => {
+    if (size >= MAX_NODES) {
+      setErrorMessage(
+        `Cannot insert: Maximum number of nodes (${MAX_NODES}) reached.`
+      );
+      return;
+    }
+
     const value = parseInt(insertAtPositionValue);
     const position = parseInt(insertPositionInput);
 
@@ -271,12 +303,15 @@ function SinglyLinkedListPG({ className }: PlaygroundProps) {
       </div>
 
       {/* Visualization Window */}
-      <div className="relative p-4 h-playground w-full flex flex-col justify-center items-center border border-black rounded-md">
+      <div
+        ref={containerRef}
+        className="relative p-4 h-playground w-full flex flex-col justify-center items-center border border-black rounded-md"
+      >
         <div className="absolute top-0 left-0 p-3 text-lg">
           <span className="font-bold">Size:</span> {size}
         </div>
 
-        <svg ref={svgRef}></svg>
+        <svg className="w-full h-full" ref={svgRef}></svg>
       </div>
 
       {/* Options */}

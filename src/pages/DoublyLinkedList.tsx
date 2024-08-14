@@ -1,5 +1,6 @@
 import map from "../data/data-structures";
 import Heading from "../components/Heading";
+import DoublyLinkedListPG from "../components/DSPlaygrounds/DoublyLinkedListPG";
 
 function DoublyLinkedList() {
   const dynamicArray = map.get("doubly-linked-list")!;
@@ -11,6 +12,7 @@ function DoublyLinkedList() {
         <Heading ds={dynamicArray} className="mb-8" />
 
         {/* Playground */}
+        <DoublyLinkedListPG />
       </div>
     </div>
   );
