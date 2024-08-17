@@ -31,7 +31,7 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🔛",
       category: "Linked Lists",
       difficulty: "Beginner",
-      notesUrl: "",
+      notesUrl: "https://dev.to/jihoonj/implementing-a-doubly-linked-list-3mlf",
     },
   ],
   [

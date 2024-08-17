@@ -358,7 +358,7 @@ function DoublyLinkedListPG({ className }: PlaygroundProps) {
         ref={containerRef}
         className="relative p-4 h-playground w-full flex flex-col justify-center items-center border border-black rounded-md"
       >
-        <div className="absolute top-0 left-0 p-3 text-lg">
+        <div data-testid="size" className="absolute top-0 left-0 p-3 text-lg">
           <span className="font-bold">Size:</span> {size}
         </div>
 
