@@ -20,6 +20,7 @@ export default {
       },
       height: {
         playground: "24rem",
+        largePlayground: "32rem",
       },
     },
   },

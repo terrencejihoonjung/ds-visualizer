@@ -42,7 +42,7 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🧮",
       category: "Arrays/Strings",
       difficulty: "Beginner",
-      notesUrl: "",
+      notesUrl: "https://dev.to/jihoonj/implementing-a-hash-table-3pa7",
     },
   ],
 ];

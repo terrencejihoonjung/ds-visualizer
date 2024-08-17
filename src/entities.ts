@@ -7,6 +7,13 @@ export type DataStructure = {
   notesUrl: string;
 };
 
+export type HashNode = {
+  key: number;
+  value: string;
+  next: HashNode | null;
+  highlight: boolean;
+};
+
 export type DataStructureKV = [string, DataStructure];
 
 export type DynamicArrayState = {
