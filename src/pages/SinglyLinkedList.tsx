@@ -3,13 +3,13 @@ import Heading from "../components/Heading";
 import SinglyLinkedListPG from "../components/DSPlaygrounds/SinglyLinkedListPG";
 
 function SinglyLinkedList() {
-  const dynamicArray = map.get("singly-linked-list")!;
+  const singlyLinkedList = map.get("singly-linked-list")!;
 
   return (
     <div className="w-full min-h-screen p-8">
       <div className="w-3/5 mx-auto">
         {/* Heading */}
-        <Heading ds={dynamicArray} className="mb-8" />
+        <Heading ds={singlyLinkedList} className="mb-8" />
 
         {/* Playground */}
         <SinglyLinkedListPG />

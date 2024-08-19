@@ -5,6 +5,8 @@ import Layout from "./Layout";
 import SinglyLinkedList from "./pages/SinglyLinkedList";
 import DoublyLinkedList from "./pages/DoublyLinkedList";
 import HashTable from "./pages/HashTable";
+import Queue from "./pages/Queue";
+import Stack from "./pages/Stack";
 
 function AppRouter() {
   return (
@@ -15,6 +17,8 @@ function AppRouter() {
         <Route path="singly-linked-list" element={<SinglyLinkedList />} />
         <Route path="doubly-linked-list" element={<DoublyLinkedList />} />
         <Route path="hash-table" element={<HashTable />} />
+        <Route path="stack" element={<Stack />} />
+        <Route path="queue" element={<Queue />} />
       </Route>
     </Routes>
   );

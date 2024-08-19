@@ -40,9 +40,31 @@ export const dataStructures: DataStructureKV[] = [
       name: "Hash Table",
       description: "Key-value pairs for efficient data retrieval.",
       icon: "🧮",
-      category: "Arrays/Strings",
+      category: "Hashing",
       difficulty: "Beginner",
       notesUrl: "https://dev.to/jihoonj/implementing-a-hash-table-3pa7",
+    },
+  ],
+  [
+    "stack",
+    {
+      name: "Stack",
+      description: "Last-In-First-Out (LIFO) data structure",
+      icon: "🥞",
+      category: "Stack",
+      difficulty: "Beginner",
+      notesUrl: "",
+    },
+  ],
+  [
+    "queue",
+    {
+      name: "Queue",
+      description: "First-In-First-Out (FIFO) data structure",
+      icon: "⏱️",
+      category: "Queue",
+      difficulty: "Beginner",
+      notesUrl: "",
     },
   ],
 ];

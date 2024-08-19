@@ -3,7 +3,7 @@ import Row from "../components/Row";
 
 function Home() {
   return (
-    <div className="w-full min-h-screen p-8">
+    <div className="w-full h-screen p-8 flex flex-col">
       <div className="w-3/5 mx-auto">
         {/* top heading */}
         <header className="mb-36">

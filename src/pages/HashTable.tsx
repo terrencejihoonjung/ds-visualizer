@@ -3,13 +3,13 @@ import Heading from "../components/Heading";
 import HashTablePG from "../components/DSPlaygrounds/HashTablePG";
 
 function HashTable() {
-  const dynamicArray = map.get("hash-table")!;
+  const hashTable = map.get("hash-table")!;
 
   return (
     <div className="w-full min-h-screen p-8">
       <div className="w-3/5 mx-auto">
         {/* Headinga */}
-        <Heading ds={dynamicArray} className="" />
+        <Heading ds={hashTable} className="" />
 
         <p className="my-4 py-3 italic">
           Note: this implementation utilizes{" "}
