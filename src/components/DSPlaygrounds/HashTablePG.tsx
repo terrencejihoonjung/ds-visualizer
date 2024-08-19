@@ -272,6 +272,7 @@ function HashTablePG({ className }: PlaygroundProps) {
       <div className="flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <input
+            data-testid="set-key-input"
             type="text"
             value={keyInput}
             onChange={(e) => setKeyInput(e.target.value)}
@@ -279,6 +280,7 @@ function HashTablePG({ className }: PlaygroundProps) {
             placeholder="Key"
           />
           <input
+            data-testid="set-value-input"
             type="text"
             value={valueInput}
             onChange={(e) => setValueInput(e.target.value)}
@@ -309,9 +311,13 @@ function HashTablePG({ className }: PlaygroundProps) {
           <span data-testid="loadFactor">{(size / capacity).toFixed(2)}</span>
         </div>
 
-        <div className="overflow-auto w-full">
+        <div data-testid="buckets" className="overflow-auto w-full">
           {buckets.map((bucket, index) => (
-            <div key={index} className="flex items-center my-1">
+            <div
+              data-testid={`bucket-${index}`}
+              key={index}
+              className="flex items-center my-1"
+            >
               <div className="w-10 h-10 bg-primary text-base-100 flex items-center justify-center mr-2">
                 {index}
               </div>
@@ -324,6 +330,7 @@ function HashTablePG({ className }: PlaygroundProps) {
                       nodes.push(
                         <div
                           key={currentNode.key}
+                          data-testid={`bucket-${index}-node`}
                           className="flex items-center"
                         >
                           <div
