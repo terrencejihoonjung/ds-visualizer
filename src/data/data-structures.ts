@@ -53,7 +53,8 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🥞",
       category: "Stack",
       difficulty: "Beginner",
-      notesUrl: "",
+      notesUrl:
+        "https://dev.to/jihoonj/lifo-or-fifo-guide-to-stacksqueues-2lf1",
     },
   ],
   [
@@ -64,7 +65,8 @@ export const dataStructures: DataStructureKV[] = [
       icon: "⏱️",
       category: "Queue",
       difficulty: "Beginner",
-      notesUrl: "",
+      notesUrl:
+        "https://dev.to/jihoonj/lifo-or-fifo-guide-to-stacksqueues-2lf1",
     },
   ],
 ];

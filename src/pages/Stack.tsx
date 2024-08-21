@@ -1,5 +1,6 @@
 import map from "../data/data-structures";
 import Heading from "../components/Heading";
+import StackPG from "../components/DSPlaygrounds/StackPG";
 // import StackPG from "../components/DSPlaygrounds/StackPG";
 
 function Stack() {
@@ -9,9 +10,10 @@ function Stack() {
     <div className="w-full min-h-screen p-8">
       <div className="w-3/5 mx-auto">
         {/* Headinga */}
-        <Heading ds={stack} className="" />
+        <Heading ds={stack} className="mb-8" />
 
         {/* Playground */}
+        <StackPG />
       </div>
     </div>
   );
