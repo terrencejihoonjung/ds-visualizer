@@ -88,6 +88,7 @@ function QueuePG({ className }: PlaygroundProps) {
             onChange={(e) => setInputValue(e.target.value)}
             className="input input-bordered"
             placeholder="Enter a number"
+            data-testid="num-input"
           />
           <button onClick={handleEnqueue} className="btn btn-outline">
             Enqueue
@@ -107,10 +108,10 @@ function QueuePG({ className }: PlaygroundProps) {
       {/* Visualization Window */}
       <div className="relative p-4 h-playground w-full flex flex-col justify-center items-center border border-black rounded-md">
         <div className="absolute top-0 left-0 p-3 text-lg flex space-x-4">
-          <span className="font-bold">Size: {size}</span>
-          <span className="font-bold">
-            Is Empty: {isEmpty() ? "Yes" : "No"}
-          </span>
+          <span className="font-bold">Size: </span>
+          <span data-testid="size">{size}</span>
+          <span className="font-bold">Is Empty: </span>
+          <span data-testid="is-empty">{isEmpty() ? "Yes" : "No"}</span>
         </div>
 
         <div className="flex items-center space-x-2">

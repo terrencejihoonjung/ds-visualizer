@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import PencilIcon from "../Icons/PencilIcon";
 import map from "../../data/data-structures";
 
-const MAX_STACK_SIZE = 12; // Increased for demonstration
+const MAX_STACK_SIZE = 12; // stack max size
 
 function StackPG({ className }: PlaygroundProps) {
   const ds = map.get("stack")!;
@@ -66,6 +66,7 @@ function StackPG({ className }: PlaygroundProps) {
             onChange={(e) => setInputValue(e.target.value)}
             className="input input-bordered"
             placeholder="Enter a number"
+            data-testid="num-input"
           />
           <button onClick={handlePush} className="btn btn-outline">
             Push
@@ -85,10 +86,10 @@ function StackPG({ className }: PlaygroundProps) {
       {/* Visualization Window */}
       <div className="relative p-4 h-playground w-full flex flex-col justify-center items-center border border-black rounded-md">
         <div className="absolute top-0 left-0 p-3 text-lg flex space-x-4">
-          <span className="font-bold">Size: {stack.length}</span>
-          <span className="font-bold">
-            Is Empty: {isEmpty() ? "Yes" : "No"}
-          </span>
+          <span className="font-bold">Size: </span>
+          <span data-testid="size">{stack.length}</span>
+          <span className="font-bold">Is Empty: </span>
+          <span data-testid="is-empty">{isEmpty() ? "Yes" : "No"}</span>
         </div>
 
         <div
