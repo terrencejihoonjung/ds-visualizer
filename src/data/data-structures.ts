@@ -69,6 +69,17 @@ export const dataStructures: DataStructureKV[] = [
         "https://dev.to/jihoonj/lifo-or-fifo-guide-to-stacksqueues-2lf1",
     },
   ],
+  [
+    "binary-search",
+    {
+      name: "Binary Search",
+      description: "",
+      icon: "⏱️",
+      category: "",
+      difficulty: "Intermediate",
+      notesUrl: "",
+    },
+  ],
 ];
 
 const map: Map<string, DataStructure> = new Map(dataStructures);
