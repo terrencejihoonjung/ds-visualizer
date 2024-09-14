@@ -10,10 +10,11 @@ function BinarySearchTreePG({ className }: PlaygroundProps) {
   const [root, setRoot] = useState<TreeNode | null>(null);
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isTraversing, setIsTraversing] = useState(false);
 
   const insert = (node: TreeNode | null, value: number): TreeNode => {
     if (node === null) {
-      return { value, left: null, right: null };
+      return { value, left: null, right: null, isHighlighted: false };
     }
 
     if (value < node.value) {
@@ -93,8 +94,104 @@ function BinarySearchTreePG({ className }: PlaygroundProps) {
     setErrorMessage("");
   };
 
+  const resetHighlight = () => {
+    setRoot(resetNodeHighlight(root));
+  };
+
+  const resetNodeHighlight = (node: TreeNode | null): TreeNode | null => {
+    if (!node) return null;
+    return {
+      ...node,
+      isHighlighted: false,
+      left: resetNodeHighlight(node.left),
+      right: resetNodeHighlight(node.right),
+    };
+  };
+
+  const traverse = (type: "inorder" | "preorder" | "postorder") => {
+    if (isTraversing) return;
+    setIsTraversing(true);
+    resetHighlight();
+    const delay = 1000; // 1 second delay between highlights
+
+    const getTraversalOrder = (node: TreeNode | null): number[] => {
+      const result: number[] = [];
+      const stack: [TreeNode | null, string][] = [[node, ""]];
+
+      while (stack.length > 0) {
+        const [current, state] = stack.pop()!;
+
+        if (current === null) continue;
+
+        if (type === "preorder" && state === "") {
+          result.push(current.value);
+        }
+
+        if (state === "") {
+          stack.push([current, "right"]);
+          stack.push([current.right, ""]);
+          stack.push([current, "left"]);
+          stack.push([current.left, ""]);
+        } else if (state === "left") {
+          if (type === "inorder") {
+            result.push(current.value);
+          }
+        } else if (state === "right") {
+          if (type === "postorder") {
+            result.push(current.value);
+          }
+        }
+      }
+
+      return result;
+    };
+
+    const traversalOrder = getTraversalOrder(root);
+
+    traversalOrder.forEach((value, index) => {
+      setTimeout(() => {
+        setRoot((prevRoot) => highlightNode(prevRoot, value));
+        if (index === traversalOrder.length - 1) {
+          setIsTraversing(false);
+        }
+      }, delay * index);
+    });
+  };
+
+  const highlightNode = (
+    node: TreeNode | null,
+    value: number
+  ): TreeNode | null => {
+    if (!node) return null;
+    return {
+      ...node,
+      isHighlighted: node.value === value,
+      left: highlightNode(node.left, value),
+      right: highlightNode(node.right, value),
+    };
+  };
+
+  const renderTree = (
+    node: TreeNode | null,
+    x: number,
+    y: number,
+    level: number
+  ): React.ReactNode => {
+    if (!node) return null;
+    return (
+      <BinaryNode
+        key={node.value}
+        node={node}
+        x={x}
+        y={y}
+        level={level}
+        isHighlighted={node.isHighlighted}
+      />
+    );
+  };
+
   return (
-    <div className={`flex flex-col w-full grow space-y-4 ${className}`}>
+    <div className={`flex flex-col h-full w-full space-y-4 ${className}`}>
       <div className="flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <input
@@ -111,16 +208,46 @@ function BinarySearchTreePG({ className }: PlaygroundProps) {
             Delete
           </button>
         </div>
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => traverse("inorder")}
+            className="btn btn-outline"
+            disabled={isTraversing}
+          >
+            In-order
+          </button>
+          <button
+            onClick={() => traverse("preorder")}
+            className="btn btn-outline"
+            disabled={isTraversing}
+          >
+            Pre-order
+          </button>
+          <button
+            onClick={() => traverse("postorder")}
+            className="btn btn-outline"
+            disabled={isTraversing}
+          >
+            Post-order
+          </button>
+          <button
+            onClick={resetHighlight}
+            className="btn btn-outline"
+            disabled={isTraversing}
+          >
+            Reset
+          </button>
+        </div>
         <Link to={ds.notesUrl} className="btn btn-outline">
           <PencilIcon /> <p>Notes</p>
         </Link>
       </div>
 
       {/* Visualization Window - To be implemented */}
-      <div className="relative p-4 grow w-full border border-black rounded-md overflow-auto">
+      <div className="relative p-4 w-full border border-black rounded-md overflow-auto">
         <svg width="100%" height="100%" viewBox="0 0 800 600">
           <g transform="translate(400, 40)">
-            {root && <BinaryNode node={root} x={0} y={0} level={0} />}
+            {root && renderTree(root, 0, 0, 0)}
           </g>
         </svg>
       </div>

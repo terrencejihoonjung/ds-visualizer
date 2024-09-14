@@ -32,4 +32,5 @@ export type TreeNode = {
   right: TreeNode | null;
   x?: number;
   y?: number;
+  isHighlighted: boolean;
 };
