@@ -1,14 +1,9 @@
 import { useState } from "react";
-import { PlaygroundProps } from "../../entities";
+import { PlaygroundProps, TreeNode } from "../../../entities";
 import { Link } from "react-router-dom";
-import PencilIcon from "../Icons/PencilIcon";
-import map from "../../data/data-structures";
-
-interface TreeNode {
-  value: number;
-  left: TreeNode | null;
-  right: TreeNode | null;
-}
+import PencilIcon from "../../Icons/PencilIcon";
+import map from "../../../data/data-structures";
+import BinaryNode from "./BinaryNode";
 
 function BinarySearchTreePG({ className }: PlaygroundProps) {
   const ds = map.get("binary-search-tree")!;
@@ -122,8 +117,12 @@ function BinarySearchTreePG({ className }: PlaygroundProps) {
       </div>
 
       {/* Visualization Window - To be implemented */}
-      <div className="relative p-4 grow w-full border border-black rounded-md">
-        {/* Tree visualization will go here */}
+      <div className="relative p-4 grow w-full border border-black rounded-md overflow-auto">
+        <svg width="100%" height="100%" viewBox="0 0 800 600">
+          <g transform="translate(400, 40)">
+            {root && <BinaryNode node={root} x={0} y={0} level={0} />}
+          </g>
+        </svg>
       </div>
 
       {/* Error Messages */}

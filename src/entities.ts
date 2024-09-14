@@ -25,3 +25,11 @@ export type DynamicArrayState = {
 export type PlaygroundProps = {
   className?: string;
 };
+
+export type TreeNode = {
+  value: number;
+  left: TreeNode | null;
+  right: TreeNode | null;
+  x?: number;
+  y?: number;
+};

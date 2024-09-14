@@ -1,6 +1,6 @@
 import map from "../data/data-structures";
 import Heading from "../components/Heading";
-import BinarySearchTreePG from "../components/DSPlaygrounds/BinarySearchTreePG";
+import BinarySearchTreePG from "../components/DSPlaygrounds/BinarySearchTree/BinarySearchTreePG";
 
 function BinarySearchTree() {
   const binarySearchTree = map.get("binary-search-tree")!;
