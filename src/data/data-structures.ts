@@ -5,7 +5,7 @@ export const dataStructures: DataStructureKV[] = [
     "dynamic-array",
     {
       name: "Dynamic Array",
-      description: "Resizable arrays with dynamic capacity.",
+      description: "Resizable arrays with dynamic capacity",
       icon: "🪟",
       category: "Arrays/Strings",
       difficulty: "Beginner",
@@ -16,7 +16,7 @@ export const dataStructures: DataStructureKV[] = [
     "singly-linked-list",
     {
       name: "Singly Linked List",
-      description: "Linear collection with nodes linked in sequence.",
+      description: "Linear collection with nodes linked in sequence",
       icon: "🔜",
       category: "Linked Lists",
       difficulty: "Beginner",
@@ -27,7 +27,7 @@ export const dataStructures: DataStructureKV[] = [
     "doubly-linked-list",
     {
       name: "Doubly Linked List",
-      description: "Nodes linked bi-directionally for efficient traversal.",
+      description: "Nodes linked bi-directionally for efficient traversal",
       icon: "🔛",
       category: "Linked Lists",
       difficulty: "Beginner",
@@ -38,7 +38,7 @@ export const dataStructures: DataStructureKV[] = [
     "hash-table",
     {
       name: "Hash Table",
-      description: "Key-value pairs for efficient data retrieval.",
+      description: "Key-value pairs for efficient data retrieval",
       icon: "🧮",
       category: "Hashing",
       difficulty: "Beginner",
@@ -70,12 +70,25 @@ export const dataStructures: DataStructureKV[] = [
     },
   ],
   [
-    "binary-search",
+    "binary-search-tree",
     {
-      name: "Binary Search",
-      description: "",
-      icon: "⏱️",
-      category: "",
+      name: "Binary Search Tree",
+      description:
+        "A binary tree where left child < parent < right child for all nodes",
+      icon: "🌲",
+      category: "Tree",
+      difficulty: "Intermediate",
+      notesUrl: "",
+    },
+  ],
+  [
+    "graph",
+    {
+      name: "Graph",
+      description:
+        "A non-linear data structure consisting of vertices (or nodes) connected by edges",
+      icon: "🕸️",
+      category: "Graph",
       difficulty: "Intermediate",
       notesUrl: "",
     },

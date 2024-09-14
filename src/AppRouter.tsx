@@ -7,6 +7,7 @@ import DoublyLinkedList from "./pages/DoublyLinkedList";
 import HashTable from "./pages/HashTable";
 import Queue from "./pages/Queue";
 import Stack from "./pages/Stack";
+import BinarySearchTree from "./pages/BinarySearchTree";
 
 function AppRouter() {
   return (
@@ -19,6 +20,7 @@ function AppRouter() {
         <Route path="hash-table" element={<HashTable />} />
         <Route path="stack" element={<Stack />} />
         <Route path="queue" element={<Queue />} />
+        <Route path="binary-search-tree" element={<BinarySearchTree />} />
       </Route>
     </Routes>
   );
