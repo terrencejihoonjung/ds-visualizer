@@ -78,19 +78,19 @@ export const dataStructures: DataStructureKV[] = [
       icon: "🌲",
       category: "Tree",
       difficulty: "Intermediate",
-      notesUrl: "",
+      notesUrl: "https://dev.to/jihoonj/trees-101-binary-heaps-tries-2ag8",
     },
   ],
   [
-    "graph",
+    "heap",
     {
-      name: "Graph",
+      name: "Min/Max Heap",
       description:
-        "A non-linear data structure consisting of vertices (or nodes) connected by edges",
-      icon: "🕸️",
-      category: "Graph",
+        "A complete binary tree where parent is always smaller or larger than its children",
+      icon: "🪣",
+      category: "Tree",
       difficulty: "Intermediate",
-      notesUrl: "",
+      notesUrl: "https://dev.to/jihoonj/trees-101-binary-heaps-tries-2ag8",
     },
   ],
 ];

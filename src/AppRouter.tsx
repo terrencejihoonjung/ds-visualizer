@@ -8,6 +8,7 @@ import HashTable from "./pages/HashTable";
 import Queue from "./pages/Queue";
 import Stack from "./pages/Stack";
 import BinarySearchTree from "./pages/BinarySearchTree";
+import Heap from "./pages/Heap";
 
 function AppRouter() {
   return (
@@ -21,6 +22,7 @@ function AppRouter() {
         <Route path="stack" element={<Stack />} />
         <Route path="queue" element={<Queue />} />
         <Route path="binary-search-tree" element={<BinarySearchTree />} />
+        <Route path="min/max-heap" element={<Heap />} />
       </Route>
     </Routes>
   );

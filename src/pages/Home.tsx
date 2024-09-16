@@ -6,7 +6,7 @@ function Home() {
     <div className="w-full h-screen p-8 flex flex-col">
       <div className="w-3/5 mx-auto">
         {/* top heading */}
-        <header className="mb-36">
+        <header className="mb-20">
           <h1 className="text-h1 font-bold mb-1">ds-visualizer</h1>
           <h1 className="text-h5 font-regular mb-2">for the visual learners</h1>
         </header>
@@ -20,7 +20,7 @@ function Home() {
           </div>
 
           {/* list */}
-          <div className="">
+          <div>
             {dataStructures.map((dataStructure) => {
               return (
                 <Row

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { PlaygroundProps, TreeNode } from "../../../entities";
 import { Link } from "react-router-dom";
 import PencilIcon from "../../Icons/PencilIcon";
 import map from "../../../data/data-structures";
 import BinaryNode from "./BinaryNode";
+
+const MAX_DEPTH = 6;
 
 function BinarySearchTreePG({ className }: PlaygroundProps) {
   const ds = map.get("binary-search-tree")!;
@@ -12,17 +14,27 @@ function BinarySearchTreePG({ className }: PlaygroundProps) {
   const [errorMessage, setErrorMessage] = useState("");
   const [isTraversing, setIsTraversing] = useState(false);
 
-  const insert = (node: TreeNode | null, value: number): TreeNode => {
+  const insert = (
+    node: TreeNode | null,
+    value: number,
+    depth: number = 1
+  ): TreeNode | null => {
+    if (depth > MAX_DEPTH) {
+      setErrorMessage(`Cannot insert: Maximum depth of ${MAX_DEPTH} reached`);
+      return node;
+    }
+
     if (node === null) {
       return { value, left: null, right: null, isHighlighted: false };
     }
 
     if (value < node.value) {
-      return { ...node, left: insert(node.left, value) };
+      return { ...node, left: insert(node.left, value, depth + 1) };
     } else if (value > node.value) {
-      return { ...node, right: insert(node.right, value) };
+      return { ...node, right: insert(node.right, value, depth + 1) };
     }
 
+    setErrorMessage("Value already exists in the tree");
     return node;
   };
 
@@ -35,7 +47,6 @@ function BinarySearchTreePG({ className }: PlaygroundProps) {
 
     setRoot((prevRoot) => insert(prevRoot, value));
     setInputValue("");
-    setErrorMessage("");
   };
 
   const findMin = (node: TreeNode): TreeNode => {
@@ -177,10 +188,9 @@ function BinarySearchTreePG({ className }: PlaygroundProps) {
     y: number,
     level: number
   ): React.ReactNode => {
-    if (!node) return null;
+    if (!node || level > MAX_DEPTH) return null;
     return (
       <BinaryNode
-        key={node.value}
         node={node}
         x={x}
         y={y}
@@ -243,17 +253,17 @@ function BinarySearchTreePG({ className }: PlaygroundProps) {
         </Link>
       </div>
 
-      {/* Visualization Window - To be implemented */}
+      {/* Error Messages */}
+      {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
+
+      {/* Visualization Window */}
       <div className="relative p-4 w-full border border-black rounded-md overflow-auto">
         <svg width="100%" height="100%" viewBox="0 0 800 600">
           <g transform="translate(400, 40)">
-            {root && renderTree(root, 0, 0, 0)}
+            {root && renderTree(root, 0, 0, 1)}
           </g>
         </svg>
       </div>
-
-      {/* Error Messages */}
-      {errorMessage && <div className="text-red-500 mb-4">{errorMessage}</div>}
     </div>
   );
 }

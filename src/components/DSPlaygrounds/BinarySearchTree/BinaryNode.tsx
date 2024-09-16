@@ -18,62 +18,58 @@ function BinaryNode({ node, x, y, level, isHighlighted }: BinaryNodeProps) {
 
   return (
     <g>
-      <circle
-        cx={x}
-        cy={y}
-        r="20"
-        fill={isHighlighted ? "yellow" : "black"}
-        stroke={"black"}
-        strokeWidth="2"
-      />
-      <text
-        x={x}
-        y={y}
-        textAnchor="middle"
-        dy=".3em"
-        fill={isHighlighted ? "black" : "white"}
-      >
-        {node.value}
-      </text>
-
       {node.left && (
-        <>
-          <line
-            x1={x}
-            y1={y + 20}
-            x2={leftChildX}
-            y2={childY - 20}
-            stroke="black"
-            strokeWidth="1"
-          />
-          <BinaryNode
-            node={node.left}
-            x={leftChildX}
-            y={childY}
-            level={level + 1}
-            isHighlighted={node.left.isHighlighted || false}
-          />
-        </>
+        <line
+          x1={x}
+          y1={y}
+          x2={leftChildX}
+          y2={childY}
+          stroke="black"
+          strokeWidth="1"
+        />
       )}
-
       {node.right && (
-        <>
-          <line
-            x1={x}
-            y1={y + 20}
-            x2={rightChildX}
-            y2={childY - 20}
-            stroke="black"
-            strokeWidth="1"
-          />
-          <BinaryNode
-            node={node.right}
-            x={rightChildX}
-            y={childY}
-            level={level + 1}
-            isHighlighted={node.right.isHighlighted || false}
-          />
-        </>
+        <line
+          x1={x}
+          y1={y}
+          x2={rightChildX}
+          y2={childY}
+          stroke="black"
+          strokeWidth="1"
+        />
+      )}
+      <g transform={`translate(${x}, ${y})`}>
+        <circle
+          r="20"
+          fill={isHighlighted ? "yellow" : "var(--primary)"}
+          stroke={isHighlighted ? "black" : "none"}
+          strokeWidth="2"
+        />
+        <text
+          textAnchor="middle"
+          dy=".3em"
+          fill={isHighlighted ? "black" : "white"}
+        >
+          {node.value}
+        </text>
+      </g>
+      {node.left && (
+        <BinaryNode
+          node={node.left}
+          x={leftChildX}
+          y={childY}
+          level={level + 1}
+          isHighlighted={node.left.isHighlighted}
+        />
+      )}
+      {node.right && (
+        <BinaryNode
+          node={node.right}
+          x={rightChildX}
+          y={childY}
+          level={level + 1}
+          isHighlighted={node.right.isHighlighted}
+        />
       )}
     </g>
   );
