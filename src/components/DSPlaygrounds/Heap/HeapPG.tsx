@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { PlaygroundProps } from "../../../entities";
 import { Link } from "react-router-dom";
 import PencilIcon from "../../Icons/PencilIcon";
@@ -129,7 +129,6 @@ function HeapPG({ className }: PlaygroundProps) {
     if (!containerRef.current) return null;
 
     const containerWidth = containerRef.current.clientWidth;
-    const containerHeight = containerRef.current.clientHeight;
     const nodeRadius = 20;
     const levelHeight = nodeRadius * 3;
     const svgHeight = MAX_DEPTH * levelHeight;
